@@ -100,28 +100,34 @@
 			<!-- Article main content -->
 			<article class="col-sm-8 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Two key pieces of automation helped secure the 2021 National UAS4STEM competition win - and $2500</h1>
+					<h1 class="page-title">Three key pieces of automation helped secure the 2021 National UAS4STEM competition win - and $2500</h1>
 				</header>
-				<p>The <a href="https://amablog.modelaircraft.org/uas4stem/">UAS4STEM competition involves a team (usually around 7-8 members)</a></p>
-				<h3>What's the problem?</h3>
-				<p>BJ Fogg, the founder of the Stanford Behavior Design Lab, famously said, “when it comes to habits, ease always beats motivation.” Even though there is a significant risk of hospitalization and dying, seniors find that current devices needed to take biometric data are too hard to use and time-consuming because of the different apps required by each sensor. This problem with solutions that rely on smartphone apps to collect and transmit data was confirmed by my own survey with more than 70 elderly participants.</p>
-				<p><img src="assets/images/map.png" alt=""></p>
-				<blockquote>Finding my gap is one of if not the most important step I can take on a project. I'm not expanding some niche field or providing genius technical expertise, so I need to make absolutely sure that a gap exists for my simple but powerful solution</blockquote>
-				<h3>Design Requirements</h3>
-				<p>I needed a way to leverage the recent innovation in cheap, accurate BlueTooth sensors while avoiding the use of apps to build habits in senior citizens to take readings daily. The design requirements for such a device are as follows:</p>
+				<p>The <a href="https://amablog.modelaircraft.org/uas4stem/">UAS4STEM competition involves a team (usually around 7-8 members)</a> competing to complete a set of tasks within a strict time limit. The most important task to optimize (for my team) was one where we had to, in a crowded, object-filled junkyard, pickup payloads from targets scattered around the area and drop them off at different targets.</p>
+				<h3>Problem #1: Landing accurately</h3>
+				<p><img src="assets/images/Targets.png" alt=""></p>
+				<blockquote>Each of these targets was a square meter, placed randomly throughout an environment. The first is a pickup target and the second is a dropoff target.</blockquote>
+				<p>The team earned more points the closer to a target they landed and this was a much greater challenge than one would initially think. Winds at Oshkosh were consistently 10 mph around the time of the competition, which not only forced our pilot to compensate for movement but also threw off his aim on the target. Our drone would have to tilt to not move against the wind, and the angle would make it look like we were above our target even when we weren't. The diagram below shows our solution to the problem.</p>
+				<p><img src="assets/images/corrected_video.png" alt=""></p>
+				<blockquote>This solution would require us to pull pitch and roll data from the drone to correct the image accordingly. Not only did this help against the wind but it also kept aim accurate when making corrective movement - the tilt in the drone would normally make it hard to know if you've moved far enough.</blockquote>
+				<h3>Design Elements</h3>
+				<p>My plan for the landing system required 4 parts: </p>
 				<ol>
-					<li>The device needs be an appliance - as easy to approach as a '90's toaster, needing to be:
-						<ul><li>Clean and simple</li>
-							<li>Gently rounded edges</li>
-							<li>No bezel on the screen</li>
-							<li>No buttons</li>
-							<li>Look solid and robust.</li>
-					</li>
-					<li>The device needs to insert itself into the daily lives of each user, regardless of what their rigid schedule was like before the device</li>
-					<li>Connect to any and all BlueTooth devices (with some support) to collect data from any source</li>
-					<li>Aggregate and send the data to the cloud</li>
-					<li>Analyize data in the cloud (perferably with as little doctor time as possible)</li>
-					<li>Let the user know their current risk level as soon as possible</li>
+					<li>A connection from the drone control system (MAVLink) which can provide pitch, roll, and altitude data to the Raspberry Pi which it will require to understand where it is</li>
+					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video and feeding it to a video transmitter</li>
+					<li>Another Raspberry Pi script which analyzes the data, searching for the target pattern. Combined with the altitude, roll, and pitch, this script needs to return some value that determines the direction and magnitude of the drone movement</li>
+					<li>A connection from the Raspberry Pi to the MAVLink system to send mevement instructions - how fast to land, which direction to move, etc.</li>
+				</ol>
+				<h3>Problem #2: Autonomous points</h3>
+				<p>Autonomous was in the name of the competition, and the organizers needed a way to incentivise teams to complete this task with as little human input as possible. Specifically, we could get half again the max amount of points in the whole competition if we got these autonomous points. GPS, however, was not precise enough for the landing, being accurate only to about 3 meters. So, we needed a way to land that relies on other measurements. I chose to make a camera setup that could see the targets and direct the drone accordingly.</p>
+				<p><img src="assets/images/Landing.gif" alt=""></p>
+				<blockquote>This solution required some hardwear changes. Our previous camera output the video directly to an analog transmitter to be seen back on the ground. That would not do for this project, so it needed to be replaced with a raspberry pi and digital camera, ontop of which we made our new OSD and vision system software.</blockquote>
+				<h3>Design Elements</h3>
+				<p>My plan for the landing system required 4 parts: </p>
+				<ol>
+					<li>A connection from the drone control system (MAVLink) which can provide pitch, roll, and altitude data to the Raspberry Pi which it will require to understand where it is</li>
+					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video and feeding it to a video transmitter</li>
+					<li>Another Raspberry Pi script which analyzes the data, searching for the target pattern. Combined with the altitude, roll, and pitch, this script needs to return some value that determines the direction and magnitude of the drone movement</li>
+					<li>A connection from the Raspberry Pi to the MAVLink system to send mevement instructions - how fast to land, which direction to move, etc.</li>
 				</ol>
 				<h3>Prototype</h3>
 				<p><img src="assets/images/first.png" width="70%" height="70%"></p>
