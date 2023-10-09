@@ -110,17 +110,17 @@
 				<p><img src="assets/images/corrected_video.png" alt=""></p>
 				<blockquote>This solution would require us to pull pitch and roll data from the drone to correct the image accordingly. Not only did this help against the wind but it also kept aim accurate when making corrective movement - the tilt in the drone would normally make it hard to know if you've moved far enough.</blockquote>
 				<h3>Design Elements</h3>
-				<p>My plan for the landing system required 4 parts: </p>
+				<p>This solution required some hardwear changes. Our previous camera output the video directly to an analog transmitter to be seen back on the ground. That would not do for this project, so it needed to be replaced with a raspberry pi and digital camera, ontop of which we made our new OSD and vision system software. My plan for the landing system required 4 parts: </p>
 				<ol>
 					<li>A connection from the drone control system (MAVLink) which can provide pitch, roll, and altitude data to the Raspberry Pi which it will require to understand where it is</li>
-					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video and feeding it to a video transmitter</li>
-					<li>Another Raspberry Pi script which analyzes the data, searching for the target pattern. Combined with the altitude, roll, and pitch, this script needs to return some value that determines the direction and magnitude of the drone movement</li>
-					<li>A connection from the Raspberry Pi to the MAVLink system to send mevement instructions - how fast to land, which direction to move, etc.</li>
+					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video, shifting the image so the center always points down, and feeding it to a video transmitter</li>
 				</ol>
+				<h3>End Solution</h3>
+				<p><img src="assets/images/corrected.gif" alt=""></p>
 				<h3>Problem #2: Autonomous points</h3>
 				<p>Autonomous was in the name of the competition, and the organizers needed a way to incentivise teams to complete this task with as little human input as possible. Specifically, we could get half again the max amount of points in the whole competition if we got these autonomous points. GPS, however, was not precise enough for the landing, being accurate only to about 3 meters. So, we needed a way to land that relies on other measurements. I chose to make a camera setup that could see the targets and direct the drone accordingly.</p>
 				<p><img src="assets/images/Landing.gif" alt=""></p>
-				<blockquote>This solution required some hardwear changes. Our previous camera output the video directly to an analog transmitter to be seen back on the ground. That would not do for this project, so it needed to be replaced with a raspberry pi and digital camera, ontop of which we made our new OSD and vision system software.</blockquote>
+				<blockquote></blockquote>
 				<h3>Design Elements</h3>
 				<p>My plan for the landing system required 4 parts: </p>
 				<ol>
