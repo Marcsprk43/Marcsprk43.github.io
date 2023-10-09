@@ -104,10 +104,10 @@
 				</header>
 				<p>The <a href="https://amablog.modelaircraft.org/uas4stem/">UAS4STEM competition involves a team (usually around 7-8 members)</a> competing to complete a set of tasks within a strict time limit. The most important task to optimize (for my team) was one where we had to, in a crowded, object-filled junkyard, pickup payloads from targets scattered around the area and drop them off at different targets.</p>
 				<h3>Problem #1: Landing accurately</h3>
-				<p><img src="assets/images/Targets.png" alt=""></p>
+				<p><img src="assets/images/Targets.png" alt="" width="70%" height="70%"></p>
 				<blockquote>Each of these targets was a square meter, placed randomly throughout an environment. The first is a pickup target and the second is a dropoff target.</blockquote>
 				<p>The team earned more points the closer to a target they landed and this was a much greater challenge than one would initially think. Winds at Oshkosh were consistently 10 mph around the time of the competition, which not only forced our pilot to compensate for movement but also threw off his aim on the target. Our drone would have to tilt to not move against the wind, and the angle would make it look like we were above our target even when we weren't. The diagram below shows our solution to the problem.</p>
-				<p><img src="assets/images/corrected_video.png" alt=""></p>
+				<p><img src="assets/images/corrected_video.png" alt="" width="70%" height="70%"></p>
 				<blockquote>This solution would require us to pull pitch and roll data from the drone to correct the image accordingly. Not only did this help against the wind but it also kept aim accurate when making corrective movement - the tilt in the drone would normally make it hard to know if you've moved far enough.</blockquote>
 				<h3>Design Elements</h3>
 				<p>This solution required some hardwear changes. Our previous camera output the video directly to an analog transmitter to be seen back on the ground. That would not do for this project, so it needed to be replaced with a raspberry pi and digital camera, ontop of which we made our new OSD and vision system software. My plan for the landing system required 4 parts: </p>
@@ -116,10 +116,10 @@
 					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video, shifting the image so the center always points down, and feeding it to a video transmitter</li>
 				</ol>
 				<h3>End Solution</h3>
-				<p><img src="assets/images/corrected.gif" alt=""></p>
+				<p><img src="assets/images/corrected.gif" alt="" width="70%" height="70%"></p>
 				<h3>Problem #2: Autonomous points</h3>
 				<p>Autonomous was in the name of the competition, and the organizers needed a way to incentivise teams to complete this task with as little human input as possible. Specifically, we could get half again the max amount of points in the whole competition if we got these autonomous points. GPS, however, was not precise enough for the landing, being accurate only to about 3 meters. So, we needed a way to land that relies on other measurements. I chose to make a camera setup that could see the targets and direct the drone accordingly.</p>
-				<p><img src="assets/images/Landing.gif" alt=""></p>
+				<p><img src="assets/images/Landing.gif" alt="" width="70%" height="70%"></p>
 				<blockquote></blockquote>
 				<h3>Design Elements</h3>
 				<p>My plan for the landing system required 4 parts: </p>
