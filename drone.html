@@ -110,7 +110,7 @@
 				<p><img src="assets/images/corrected_video.png" alt="" width="70%" height="70%"></p>
 				<blockquote>This solution would require us to pull pitch and roll data from the drone to correct the image accordingly. Not only did this help against the wind but it also kept aim accurate when making corrective movement - the tilt in the drone would normally make it hard to know if you've moved far enough.</blockquote>
 				<h3>Design Elements</h3>
-				<p>This solution required some hardwear changes. Our previous camera output the video directly to an analog transmitter to be seen back on the ground. That would not do for this project, so it needed to be replaced with a raspberry pi and digital camera, ontop of which we made our new OSD and vision system software. My plan for the landing system required 4 parts: </p>
+				<p>This solution required some hardwear changes. Our previous camera output the video directly to an analog transmitter to be seen back on the ground. That would not do for this project, so it needed to be replaced with a raspberry pi and digital camera, ontop of which we made our new OSD and vision system software. My plan for the landing system required 2 parts: </p>
 				<ol>
 					<li>A connection from the drone control system (MAVLink) which can provide pitch, roll, and altitude data to the Raspberry Pi which it will require to understand where it is</li>
 					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video, shifting the image so the center always points down, and feeding it to a video transmitter</li>
