@@ -74,6 +74,12 @@
 
 				<div class="row widget">
 					<div class="col-xs-12">
+						<h4>Github</h4>
+						<p>Unfortunately, I cannot show the GitHub as the team is currently using these solutions!</p>
+
+					</div>
+
+					<div class="col-xs-12">
 						<h4>Competitions and awards</h4>
 						<p><b>UAS4STEM National Autonomous drone competition</b>
 							<ul><li>1st place 2022: $2500 (I was team leader for this one!)</li>
@@ -120,15 +126,14 @@
 				<h3>Problem #2: Autonomous points</h3>
 				<p>Autonomous was in the name of the competition, and the organizers needed a way to incentivise teams to complete this task with as little human input as possible. Specifically, we could get half again the max amount of points in the whole competition if we got these autonomous points. GPS, however, was not precise enough for the landing, being accurate only to about 3 meters. So, we needed a way to land that relies on other measurements. I chose to make a camera setup that could see the targets and direct the drone accordingly.</p>
 				<p><img src="assets/images/Landing.gif" alt="" width="70%" height="70%"></p>
-				<blockquote></blockquote>
 				<h3>Design Elements</h3>
-				<p>My plan for the landing system required 4 parts: </p>
-				<ol>
-					<li>A connection from the drone control system (MAVLink) which can provide pitch, roll, and altitude data to the Raspberry Pi which it will require to understand where it is</li>
-					<li>A Raspberry Pi script which takes the place of a tradition on-screen display, creating a HUD ontop of live video and feeding it to a video transmitter</li>
-					<li>Another Raspberry Pi script which analyzes the data, searching for the target pattern. Combined with the altitude, roll, and pitch, this script needs to return some value that determines the direction and magnitude of the drone movement</li>
-					<li>A connection from the Raspberry Pi to the MAVLink system to send mevement instructions - how fast to land, which direction to move, etc.</li>
-				</ol>
+				<p>To tackle this problem, I would need the roll, pitch, and yaw inputs from the previous issue. With it, I would create another Raspberry Pi script which analyzes the data, searching for the target pattern. This script needs to return some value that determines the direction and magnitude of the drone movement required to land accurately on the target. The image search could be accomplished in two ways:</p>
+				<ul>
+					<li>An algorithmic approach, searching for the circles and rectangles that make up the target. This was the system that I personally worked on for the team as I saw its immediate applicable value in the stressful days leading up to the competition. It was, while accurate, quite computationally intensive.</li>
+					<li>An AI approach, where where we train a model in a drone simulation software to detect targets itself and then try and apply that to real life. This is the system the team is currently working on, though I am no longer a memmber.</li>
+				</ul>
+				<p><img src="assets/images/landing.png" alt="" width="70%" height="70%"></p>
+				<blockquote>This is a picture from the current team. While my solution directly used the elements of the landing targets, the competition was revamped and targets became much less simple, requiring a different solution.</blockquote>
 				<h3>Prototype</h3>
 				<p><img src="assets/images/first.png" width="70%" height="70%"></p>
 				<p><b>Serious prototype #1</b><br>
