@@ -126,35 +126,27 @@
 				<h3>Problem #2: Autonomous points</h3>
 				<p>Autonomous was in the name of the competition, and the organizers needed a way to incentivise teams to complete this task with as little human input as possible. Specifically, we could get half again the max amount of points in the whole competition if we got these autonomous points. GPS, however, was not precise enough for the landing, being accurate only to about 3 meters. So, we needed a way to land that relies on other measurements. I chose to make a camera setup that could see the targets and direct the drone accordingly.</p>
 				<p><img src="assets/images/Landing.gif" alt="" width="70%" height="70%"></p>
+				<blockquote>The green circle on the target is the computer deciding exactly where the center is - quite accurate under 20 meters.</blockquote>
 				<h3>Design Elements</h3>
 				<p>To tackle this problem, I would need the roll, pitch, and yaw inputs from the previous issue. With it, I would create another Raspberry Pi script which analyzes the data, searching for the target pattern. This script needs to return some value that determines the direction and magnitude of the drone movement required to land accurately on the target. The image search could be accomplished in two ways:</p>
 				<ul>
-					<li>An algorithmic approach, searching for the circles and rectangles that make up the target. This was the system that I personally worked on for the team as I saw its immediate applicable value in the stressful days leading up to the competition. It was, while accurate, quite computationally intensive.</li>
-					<li>An AI approach, where where we train a model in a drone simulation software to detect targets itself and then try and apply that to real life. This is the system the team is currently working on, though I am no longer a memmber.</li>
+					<li>An algorithmic approach, searching for the circles and rectangles that make up the target. This was the system that I personally worked on for the team as I saw its immediate applicable value in the stressful days leading up to the competition. It was, while accurate, quite computationally intensive. We did not end up using it that competition because it was completed too late to be trusted, but it has since been tested and proven effective. Essentially, we used a mode on the flight controller that accepts an input vector of the center of the target (corrected for height and angle of camera) and decides itself how fast to move.</li>
+					<li>An AI approach, where where we train a model in a drone simulation software to detect targets itself and then try and apply that to real life. This is the system the team is currently working on, though I am no longer a member.</li>
 				</ul>
 				<p><img src="assets/images/landing.png" alt="" width="70%" height="70%"></p>
 				<blockquote>This is a picture from the current team. While my solution directly used the elements of the landing targets, the competition was revamped and targets became much less simple, requiring a different solution.</blockquote>
-				<h3>Prototype</h3>
-				<p><img src="assets/images/first.png" width="70%" height="70%"></p>
-				<p><b>Serious prototype #1</b><br>
-				This prototype was built with a raspberry pi and a small screen in a simple and blocky enclosure made with CAD and printed with my personal 3D printer. It's interface was made purely in Python, with a weather app on the front (to insert itself into the daily lives of the users) and a single threaded, flask backend that could only connect to one device at a time<br>
-				<b>The problems:</b><br>
-				The physical design was ugly - few people would want it on their kitchen counter or other very visible location, which would impede the habit-forming required. Finally, using only one device at a time prolonged the measurements significantly, and I needed to change that restriction.</p>
-				<h3>The final product</h3>
-				<p><img src="assets/images/ath_final.png" width="70%" height="70%"></p>
-				<p><b>Improvements: </b><br>
-				With the feedback from a survey of 70 seniors, and a chat with an epidemiologist and chronic disease specialist, I refined the physical design to be approachable and displayable. The new system runs on a JavaScript frontend, which allows flexibility in choosing the main screen to best catch the attention of the user. Now, I can put any website as the main screen - news, sports, etc. I also improved my homemade weather app:</p>
-				<p><img src="assets/images/weather.png" width="70%" height="70%"></p>
-				<p>I also used asyncio, an asyncronous Python library, to allow the connection of multiple devices at once</p>
-				<p><img src="assets/images/readings.png" width="70%" height="70%"></p>
-				<h3>Learnings</h3>
-				<p><ul>
-					<li>How to create a frontend with HTML and CSS and with Python</li>
-					<li>Core design of asyncronous coding</li>
-					<li>Research competitors in a market</li>
-					<li>Interact with Google Cloud</li>
-					<li>Create sleek physical designs</li>
-					</ul></p>
+				<h3>Problem #3: Target GPS coordinates</h3>
+				<p>In order to maximize the autonomous points, we would have to get the GPS coordinates of the points manually and then send the drone automatically to those locations before enabling our self-landing script. This was very time consuming, however, and the competition no longer allowed compeditors to go over the time limit for a penalty. I devised a script where I matched a picture to correct GPS coordinates so that, instead of hovering above each target to get a reading, we could instead just take a picture from high up, mark the locations of the targets on the pictures, and get the coordinates all in one shot. This system required 4 steps:
+					<ol>
+						<li>First, the GPS coordinates. I took a Google Maps image of the area beforehand and used a program I made to match each pixel of the image to a GPS coordinate, as determined by Google Maps. </li>
+						<li>Second, I took an image of the current area (which had changed dramatically) the day before the competion with our drone. I then manually matched points on the this picture with my Google Maps picture.</li>
+						<li>Then, during the competition, we took a photo from 50 meters up and automatically points on it against the picture the day before using a FLANN based point matcher. This allowed us to quickly find the GPS points of any target we saw in the picture.</li>
+						<li>Finally, using the true GPS coordinate of our landing area and the recorded coordinate from the drone, we could eliminate GPS shift to more accurately get on targets.</li>
+					</ol>
+				</p>
+				<p><img src="assets/images/matches.jpg" alt="" width="70%" height="70%"></p>
+				<blockquote>This was an attempt at directly and automatically matching a new picture to a Google Maps picture. It was too unreliable to use, which is why I added the extra manual step, but from there it is simple to find the coordinate of any point in the new picture.</blockquote>
+
 
 			</article>
 			<!-- /Article -->
