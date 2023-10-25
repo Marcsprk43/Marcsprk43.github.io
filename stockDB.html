@@ -74,27 +74,17 @@
 
 				<div class="row widget">
 					<div class="col-xs-12">
-						<h4>Competitions and awards</h4>
-						<p><b>K-12 InVenture Prize</b><br>
-						-Medical Device award <br />
-						 -Invitation to National Invention Convention<br>
-						<b>National Invention Convention</b> <br>
-						 -Second Place overall <br>
-						 -Communication Award <br>
-						 -Cantor Colburn Patent Award</p>
+						<h4>GitHub</h4>
+						<p>Only my <a href="https://www.github.com/Marcsprk43/backtesting">backtesing algorithm</a> is publicly accessable</p>
 
 					</div>
 				</div>
+
 				<div class="row widget">
 					<div class="col-xs-12">
-						<h4>Patent pending with Cantor Colburn!</h4>
-						<p><img src="assets/images/cc.png" alt=""></p>
-					</div>
-				</div>
-				<div class="row widget">
-					<div class="col-xs-12">
-						<h4>Interviewed for an <a href="https://www.ipoef.org/iponmymind-2/marc-vanzyl/">IPOEF spotlight</a></h4>
-						<p><img src="assets/images/IPOA.png" alt=""></p>
+						<h4><a href="https://www.opescapital.co.za/">Opes Capital</a></h4>
+						<p><img src="assets/images/opus.png" width="70%" height="70%"></p>
+
 					</div>
 				</div>
 
@@ -103,50 +93,15 @@
 			<!-- Article main content -->
 			<article class="col-sm-8 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Chronic diseases symptoms, while highly predictable, are extremely deadly. I set out to change that.</h1>
+					<h1 class="page-title">Can generative transformers provide flexibility and insight that current regression cannot? I created a backtesting system and database to test this.</h1>
 				</header>
-				<p>Chronic diseases are a large and growing health problem in the US, and the main group affected by chronic diseases, senior citizens, has been largely ignored by the increasingly app- and smartphone-based solutions that monitor critical biometrics to prevent chronic disease flare-ups or critical life-threatening episodes.</p>
-				<h3>What's the problem?</h3>
-				<p>BJ Fogg, the founder of the Stanford Behavior Design Lab, famously said, “when it comes to habits, ease always beats motivation.” Even though there is a significant risk of hospitalization and dying, seniors find that current devices needed to take biometric data are too hard to use and time-consuming because of the different apps required by each sensor. This problem with solutions that rely on smartphone apps to collect and transmit data was confirmed by my own survey with more than 70 elderly participants.</p>
+				<p>Opes Capital was interested in training a generative transformer that would help narrow down investment options and provide advice for 6- and 12-month trading. To set up the infratstructure for this, I was in charge of designing and implementing a database structure to most efficiently access data as well as building a backtester to analyze the success of any transformer they trained. Next semester, I may be working on the transformer itself.</p>
+				<h3>The database</h3>
+				<p>For this project, I consulted with a google cloud expert who helped me figure out the general structure that would work best for my specific needs. As the project grew and my understanding of what was nessesary expanded, I went through multiple iterations of designs. In addition to design, I had to clean input data (about 8000 companies worth), merge multiple entries for the same companies, and generate meaningful metadata for each company.</p>
 				<p><img src="assets/images/map.png" alt=""></p>
-				<blockquote>Finding my gap is one of if not the most important step I can take on a project. I'm not expanding some niche field or providing genius technical expertise, so I need to make absolutely sure that a gap exists for my simple but powerful solution</blockquote>
-				<h3>Design Requirements</h3>
-				<p>I needed a way to leverage the recent innovation in cheap, accurate BlueTooth sensors while avoiding the use of apps to build habits in senior citizens to take readings daily. The design requirements for such a device are as follows:</p>
-				<ol>
-					<li>The device needs be an appliance - as easy to approach as a '90's toaster, needing to be:
-						<ul><li>Clean and simple</li>
-							<li>Gently rounded edges</li>
-							<li>No bezel on the screen</li>
-							<li>No buttons</li>
-							<li>Look solid and robust.</li>
-					</li>
-					<li>The device needs to insert itself into the daily lives of each user, regardless of what their rigid schedule was like before the device</li>
-					<li>Connect to any and all BlueTooth devices (with some support) to collect data from any source</li>
-					<li>Aggregate and send the data to the cloud</li>
-					<li>Analyize data in the cloud (perferably with as little doctor time as possible)</li>
-					<li>Let the user know their current risk level as soon as possible</li>
-				</ol>
-				<h3>Prototype</h3>
-				<p><img src="assets/images/first.png" width="70%" height="70%"></p>
-				<p><b>Serious prototype #1</b><br>
-				This prototype was built with a raspberry pi and a small screen in a simple and blocky enclosure made with CAD and printed with my personal 3D printer. It's interface was made purely in Python, with a weather app on the front (to insert itself into the daily lives of the users) and a single threaded, flask backend that could only connect to one device at a time<br>
-				<b>The problems:</b><br>
-				The physical design was ugly - few people would want it on their kitchen counter or other very visible location, which would impede the habit-forming required. Finally, using only one device at a time prolonged the measurements significantly, and I needed to change that restriction.</p>
-				<h3>The final product</h3>
-				<p><img src="assets/images/ath_final.png" width="70%" height="70%"></p>
-				<p><b>Improvements: </b><br>
-				With the feedback from a survey of 70 seniors, and a chat with an epidemiologist and chronic disease specialist, I refined the physical design to be approachable and displayable. The new system runs on a JavaScript frontend, which allows flexibility in choosing the main screen to best catch the attention of the user. Now, I can put any website as the main screen - news, sports, etc. I also improved my homemade weather app:</p>
-				<p><img src="assets/images/weather.png" width="70%" height="70%"></p>
-				<p>I also used asyncio, an asyncronous Python library, to allow the connection of multiple devices at once</p>
-				<p><img src="assets/images/readings.png" width="70%" height="70%"></p>
-				<h3>Learnings</h3>
-				<p><ul>
-					<li>How to create a frontend with HTML and CSS and with Python</li>
-					<li>Core design of asyncronous coding</li>
-					<li>Research competitors in a market</li>
-					<li>Interact with Google Cloud</li>
-					<li>Create sleek physical designs</li>
-					</ul></p>
+				<blockquote>NEED PICTURE OF DATABASE, PROBABLY WITH PROOF OF AMOUNT OF ENTRIES</blockquote>
+				<h3>Backtesting</h3>
+				<p>I am not finishing this until I understand what to even put on this page.</p>
 
 			</article>
 			<!-- /Article -->
